@@ -12,10 +12,6 @@ $breadcrumb[] = $model->name;
 $this->breadcrumbs=$breadcrumb;
 
 $user = User::getUser();
-if(!empty($user)) $item = $user->getItem($model->id);
-//print_r($item->attributes);
-//print_r($user->getItems());
-$tags = $model->tags;
 ?>
 <div>
     <div class="row">
