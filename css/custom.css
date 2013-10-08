@@ -1,0 +1,27 @@
+body{
+    background: #fafafa;
+}
+
+.breadcrumb {
+    margin-top: 10px;
+    background: #efefef;
+}
+.breadcrumbs a{
+    padding: 0px 5px 0px 5px;
+}
+
+div.well{
+    background: #fff;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.partimage {
+        display: block;
+	overflow: hidden;
+}
+
+.polaroid { background: #fff; display: inline; float: left; width: auto; padding: 8px 8px 10px; text-align: center; text-decoration: none; color: #333; font-size: 14px; -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.25); box-shadow: 0 3px 6px rgba(0,0,0,.25); -moz-box-shadow: 0 3px 6px rgba(0,0,0,.25); }
+
