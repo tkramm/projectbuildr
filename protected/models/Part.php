@@ -154,12 +154,13 @@ class Part extends CActiveRecord
         }
         
         public function getBestPrice(){
+            $smallestUnit = $this->smallestUnit;
             $lowest = 0;
             $supplys = $this->supply;
             foreach ($supplys as $supply){
                 $prices = $supply->prices;
                 foreach($prices as $price){
-                    if(($price->quantity == 1) AND ($lowest == 0 OR $price->unit_price < $lowest)){
+                    if(($price->quantity == $smallestUnit) AND ($lowest == 0 OR $price->unit_price < $lowest)){
                         $lowest = $price->unit_price;
                     }
                 }
@@ -181,6 +182,20 @@ class Part extends CActiveRecord
             return $lowest;
         }
         
+        public function getSmallestUnit(){
+            $smallestUnit = 99999;
+            $supplys = $this->supply;
+            foreach ($supplys as $supply){
+                $prices = $supply->prices;
+                foreach($prices as $price){
+                    if(($smallestUnit > $price->quantity)){
+                        $smallestUnit = $price->quantity;
+                    }
+                }
+            }
+            return $smallestUnit;
+        }
+
         public static function getThumbURL($image_id){
             $image = Image::model()->findByPk($image_id);
             $thumb_path = $image->path.'thumbs/'.$image->filename;
