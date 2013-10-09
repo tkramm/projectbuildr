@@ -87,6 +87,7 @@ class PartController extends Controller
 		$this->render('view',array(
 			'model'=>$model,
 		));
+            $model->disableBehavior('CTimestampBehavior');
             $model->views = $model->views+1;
             $model->save();
 	}
