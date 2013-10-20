@@ -14,6 +14,7 @@ $this->breadcrumbs=$breadcrumb;
             <h4>Parts</h4>
             <ul>
                 <li><?php echo CHtml::link('Part locations',array('workshop/locations')); ?></li>
+                <li><?php echo CHtml::link('Bestellen',array('workshop/order')); ?></li>
             </ul>
             
         </div>

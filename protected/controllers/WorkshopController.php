@@ -20,7 +20,7 @@ class WorkshopController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('index','Locations','LocationDetail'),
+				'actions'=>array('index','Locations','LocationDetail','Order'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -92,6 +92,21 @@ class WorkshopController extends Controller
                 $list[$location->location][$location->assortment][$location->box] = $location;
             }
             $this->render('locations',array('list'=>$list));
+	}
+        
+	public function actionOrder()
+	{
+            $this->pageTitle = Yii::app()->name . ' / myWorkshop / Bestellen';
+            $user = User::getUser();
+            $items = Item::model()->findAll('user_id = '.$user->id.' && quantity < quantity_warning && quantity_warning != 0');
+            $suppliers = array();
+            foreach ($items as $itemIndex => $item) {
+                foreach ($item->part->suppliers as $supplier) {
+                    $suppliers[$supplier->id][] = $itemIndex;
+                }                
+            }
+            $this->render('order',array('items'=>$items,'suppliers'=>$suppliers));
+            
 	}
 
 
