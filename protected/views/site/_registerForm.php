@@ -26,6 +26,14 @@
         </div>
     </div>
     <div class="control-group">
+        <?php echo $form->labelEx($model,'verifyCode',array('class'=>'control-label')); ?>
+        <div class="controls">
+        <?php $this->widget('CCaptcha'); ?>
+        <?php echo $form->textField($model,'verifyCode'); ?>
+        <?php echo $form->error($model,'verifyCode'); ?>
+        </div>
+    </div>
+    <div class="control-group">
         <div class="controls">
         <?php echo CHtml::submitButton('Register',array('class'=>'btn')); ?>
         </div>

@@ -18,7 +18,17 @@ class UserController extends Controller
 		);
 	}
 
-	/**
+        public function actions(){
+         return array(
+           // captcha action renders the CAPTCHA image displayed on the user registration page
+           'captcha'=>array(
+             'class'=>'CCaptchaAction',
+             'backColor'=>0xFFFFFF,
+           ),
+         );
+        }
+
+        /**
 	 * Specifies the access control rules.
 	 * This method is used by the 'accessControl' filter.
 	 * @return array access control rules
@@ -27,7 +37,7 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','captcha'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -127,9 +137,10 @@ class UserController extends Controller
 	 */
 	public function actionIndex()
 	{
+            $models = User::model()->findAll(array('order'=>'lastLogin DESC'));
 		$dataProvider=new CActiveDataProvider('User');
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'models'=>$models,
 		));
 	}
 

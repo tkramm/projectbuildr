@@ -18,6 +18,7 @@
  */
 class User extends CActiveRecord
 {
+        public $verifyCode;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -63,6 +64,7 @@ class User extends CActiveRecord
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, username, password, salt, email', 'safe', 'on'=>'search'),
+                        array('verifyCode', 'ext.validators.AjaxCaptchaValidator', 'allowEmpty'=>!CCaptcha::checkRequirements()),
 		);
 	}
 
