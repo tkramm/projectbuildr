@@ -15,7 +15,6 @@ class PartController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -324,7 +323,14 @@ class PartController extends Controller
         }
         
         public function actionremoveSupplierRelation($id,$supplier_id){
-            PartSupplier::model()->deleteAllByAttributes(array('part_id'=>$id,'supplier_id'=>$supplier_id));
+            $model = PartSupplier::model()->findByAttributes(array('part_id'=>$id,'supplier_id'=>$supplier_id));
+            foreach($model->prices as $price){
+                $price->delete();
+            }
+            if(!$model->delete()) {
+                print_r($model->getErrors());                
+                die();
+            }
             $this->redirect(array('part/update','id'=>$id));
         }
         

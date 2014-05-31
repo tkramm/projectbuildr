@@ -80,12 +80,12 @@ class PartSupplier extends CActiveRecord
 		);
 	}
 
-        protected function beforeDelete()
-
-        {
-            foreach ($this->prices as $price) $price->delete();
-            parent::beforeDelete();
-        }        
+//        protected function beforeDelete()
+//
+//        {
+//            if(!empty($this->prices)) foreach ($this->prices as $price) $price->delete();
+//            parent::beforeDelete();
+//        }        
         
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.

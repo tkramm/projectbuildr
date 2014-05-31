@@ -176,8 +176,13 @@ class SiteController extends Controller
 		{
 			$login->attributes=$_POST['LoginForm'];
 			// validate user input and redirect to the previous page if valid
-			if($login->validate() && $login->login())
-				$this->redirect(Yii::app()->user->returnUrl);
+			if($login->validate() && $login->login()){
+                            $user = User::model()->findByPk(Yii::app()->user->id);
+                            $user->lastLogin = date('Y-m-d H:i:s');
+                            $user->update();
+                            $this->redirect(Yii::app()->user->returnUrl);
+                            
+                        }
 		}
                 
                 if(isset($_POST['User']))
